@@ -50,7 +50,8 @@ The website consists of the following HTML pages:
 1. **index.html:** The main page with an overview of the website.
 2. **about.html:** Detailed biography of Thomas Sowell.
 3. **works.html:** List of notable works by Thomas Sowell.
-4. **contact.html:** Contact form to reach out to the website's creators.
+4. **quotes.html:** Extensive list of memorable quotes from Thomas Sowell.
+5. **contact.html:** Contact form to reach out to the website's creators.
 
 ## Contributing
 
