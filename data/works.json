@@ -1,0 +1,176 @@
+{
+ "as_of": "2026-11-08",
+ "note": "A selection, not a complete bibliography. Years are first publication, from the owner's knowledge and not yet checked against a catalogue.",
+ "subjects": [
+  {
+   "id": "economics",
+   "name": "Economics",
+   "shape": "square"
+  },
+  {
+   "id": "race",
+   "name": "Race, culture and history",
+   "shape": "circle"
+  },
+  {
+   "id": "theory",
+   "name": "Social theory",
+   "shape": "diamond"
+  },
+  {
+   "id": "essays",
+   "name": "Essays and memoir",
+   "shape": "triangle"
+  },
+  {
+   "id": "education",
+   "name": "Education",
+   "shape": "bar"
+  }
+ ],
+ "works": [
+  {
+   "year": 1972,
+   "title": "Say's Law: An Historical Analysis",
+   "subject": "economics"
+  },
+  {
+   "year": 1974,
+   "title": "Classical Economics Reconsidered",
+   "subject": "economics"
+  },
+  {
+   "year": 1975,
+   "title": "Race and Economics",
+   "subject": "race"
+  },
+  {
+   "year": 1980,
+   "title": "Knowledge and Decisions",
+   "subject": "theory"
+  },
+  {
+   "year": 1981,
+   "title": "Ethnic America: A History",
+   "subject": "race"
+  },
+  {
+   "year": 1985,
+   "title": "Marxism: Philosophy and Economics",
+   "subject": "theory"
+  },
+  {
+   "year": 1987,
+   "title": "A Conflict of Visions",
+   "subject": "theory",
+   "blurb": "The two competing pictures of human nature that, he argues, sit underneath political disagreement."
+  },
+  {
+   "year": 1987,
+   "title": "Compassion Versus Guilt and Other Essays",
+   "subject": "essays"
+  },
+  {
+   "year": 1990,
+   "title": "Preferential Policies: An International Perspective",
+   "subject": "race"
+  },
+  {
+   "year": 1993,
+   "title": "Is Reality Optional? And Other Essays",
+   "subject": "essays"
+  },
+  {
+   "year": 1994,
+   "title": "Race and Culture: A World View",
+   "subject": "race"
+  },
+  {
+   "year": 1995,
+   "title": "The Vision of the Anointed",
+   "subject": "theory"
+  },
+  {
+   "year": 1996,
+   "title": "Migrations and Cultures: A World View",
+   "subject": "race"
+  },
+  {
+   "year": 1998,
+   "title": "Conquests and Cultures: An International History",
+   "subject": "race"
+  },
+  {
+   "year": 1999,
+   "title": "The Quest for Cosmic Justice",
+   "subject": "theory"
+  },
+  {
+   "year": 2000,
+   "title": "Basic Economics",
+   "subject": "economics",
+   "blurb": "Economics for the general reader, built on scarcity, prices and incentives rather than jargon."
+  },
+  {
+   "year": 2000,
+   "title": "A Personal Odyssey",
+   "subject": "essays"
+  },
+  {
+   "year": 2004,
+   "title": "Applied Economics",
+   "subject": "economics"
+  },
+  {
+   "year": 2005,
+   "title": "Black Rednecks and White Liberals",
+   "subject": "race",
+   "blurb": "Essays on culture, history and the habits that outlast the circumstances that made them."
+  },
+  {
+   "year": 2006,
+   "title": "Ever Wonder Why? And Other Controversial Essays",
+   "subject": "essays"
+  },
+  {
+   "year": 2008,
+   "title": "Economic Facts and Fallacies",
+   "subject": "economics"
+  },
+  {
+   "year": 2009,
+   "title": "The Housing Boom and Bust",
+   "subject": "economics"
+  },
+  {
+   "year": 2010,
+   "title": "Intellectuals and Society",
+   "subject": "theory"
+  },
+  {
+   "year": 2010,
+   "title": "Dismantling America",
+   "subject": "essays"
+  },
+  {
+   "year": 2015,
+   "title": "Wealth, Poverty and Politics",
+   "subject": "race"
+  },
+  {
+   "year": 2018,
+   "title": "Discrimination and Disparities",
+   "subject": "race"
+  },
+  {
+   "year": 2020,
+   "title": "Charter Schools and Their Enemies",
+   "subject": "education"
+  },
+  {
+   "year": 2023,
+   "title": "Social Justice Fallacies",
+   "subject": "theory"
+  }
+ ]
+}

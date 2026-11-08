@@ -1,0 +1,125 @@
+{
+ "as_of": "2026-11-08",
+ "tiers": [
+  {
+   "id": "sourced",
+   "name": "Source named",
+   "rule": "solid",
+   "blurb": "A book is named. Edition and page are still to be checked."
+  },
+  {
+   "id": "attributed",
+   "name": "Widely attributed",
+   "rule": "dashed",
+   "blurb": "Printed everywhere as his; we have not yet checked the primary source."
+  },
+  {
+   "id": "doubtful",
+   "name": "Doubtful",
+   "rule": "dotted",
+   "blurb": "We could not place it. Treat it as unverified."
+  },
+  {
+   "id": "misattributed",
+   "name": "Probably not his",
+   "rule": "double",
+   "blurb": "Credited to someone else, or not found in his writing."
+  }
+ ],
+ "quotes": [
+  {
+   "text": "The most basic question is not what is best, but who shall decide what is best.",
+   "tier": "sourced",
+   "source": "A Conflict of Visions (1987)",
+   "note": "Edition and page not yet checked."
+  },
+  {
+   "text": "There are only two ways of telling the complete truth — anonymously and posthumously.",
+   "tier": "sourced",
+   "source": "Is Reality Optional? And Other Essays (1993)",
+   "note": "Edition and page not yet checked."
+  },
+  {
+   "text": "It takes considerable knowledge just to realize the extent of your own ignorance.",
+   "tier": "attributed"
+  },
+  {
+   "text": "Socialism in general has a record of failure so blatant that only an intellectual could ignore or evade it.",
+   "tier": "attributed"
+  },
+  {
+   "text": "The first lesson of economics is scarcity: there is never enough of anything to fully satisfy all those who want it.",
+   "tier": "attributed",
+   "note": "Often printed with its second half: “The first lesson of politics is to disregard the first lesson of economics.”"
+  },
+  {
+   "text": "There are no solutions, only trade-offs.",
+   "tier": "attributed",
+   "note": "Widely repeated as his; the wording varies between printings."
+  },
+  {
+   "text": "The welfare state is not really about the welfare of the masses. It is about the egos of the elites.",
+   "tier": "attributed"
+  },
+  {
+   "text": "One of the consequences of such notions as ‘entitlements’ is that people who have contributed nothing to society feel that society owes them something, apparently just for being nice enough to grace us with their presence.",
+   "tier": "attributed"
+  },
+  {
+   "text": "Much of the social history of the Western world over the past three decades has involved replacing what worked with what sounded good.",
+   "tier": "attributed"
+  },
+  {
+   "text": "The fact that so many successful politicians are such shameless liars is not only a reflection on them, it is also a reflection on us. When the people want the impossible, only liars can satisfy.",
+   "tier": "attributed"
+  },
+  {
+   "text": "If you have always believed that everyone should play by the same rules and be judged by the same standards, that would have gotten you labeled a radical 60 years ago, a liberal 30 years ago, and a racist today.",
+   "tier": "attributed"
+  },
+  {
+   "text": "Freedom has cost too much blood and agony to be relinquished at the cheap price of rhetoric.",
+   "tier": "attributed"
+  },
+  {
+   "text": "Extrapolating from what is known to what is unknown is a dangerous game, even when it is done with the best of intentions.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books."
+  },
+  {
+   "text": "The next time someone tells you how unfair the free market is, ask them how much their job would pay if they were the only one in the world qualified to do it.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books; it circulates mostly as an image caption."
+  },
+  {
+   "text": "People who have been given a monopoly of power tend to abuse it.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books."
+  },
+  {
+   "text": "One of the most common mistakes is to confuse the cost of something with its value.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books."
+  },
+  {
+   "text": "The most basic function of government is to protect the individual from the predatory actions of others.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books."
+  },
+  {
+   "text": "Too often, the most important lessons are learned too late in life. When the first generation learns, the second generation forgets.",
+   "tier": "doubtful",
+   "note": "We could not place this in his books."
+  },
+  {
+   "text": "It's not what you don't know that gets you into trouble, it's what you know for sure that just ain't so.",
+   "tier": "misattributed",
+   "note": "Often credited to Mark Twain; the saying has been traced to others. We have not found it in Sowell's writing."
+  },
+  {
+   "text": "The idea that some lives matter less is the root of all that is wrong with the world.",
+   "tier": "misattributed",
+   "note": "Usually credited to Paul Farmer, the physician and anthropologist. We have not found it in Sowell's writing."
+  }
+ ]
+}
