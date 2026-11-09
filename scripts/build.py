@@ -22,6 +22,7 @@ quotes, tiers = Q["quotes"], {t["id"]: t for t in Q["tiers"]}
 Y0, Y1 = min(w["year"] for w in works), max(w["year"] for w in works)
 NB = len(works)
 by_tier = Counter(q["tier"] for q in quotes)
+START = set()
 REPO = "https://github.com/SolutionsAsService/ThomasSowell"
 
 NAV = [("index.html", "Home"), ("about.html", "About"), ("works.html", "Works"), ("quotes.html", "Quotes"), ("corrections.html", "Corrections")]
@@ -50,11 +51,12 @@ def shelf():
     base = H_ - 20
     out.append(f'<line x1="0" y1="{base + 8}" x2="{W_}" y2="{base + 8}" class="plank"/>')
     out.append(f'<rect x="0" y="{base + 10}" width="{W_}" height="6" class="plank-edge"/>')
+    starters = Counter(w["year"] for w in works if w.get("blurb"))
     for y in sorted(per):
         cx = pad + 20 + (y - Y0) * step
         for i in range(per[y]):
             yy = base - (i + 1) * (bh + gap) + gap
-            shade = ("a", "b", "c")[(y + i) % 3]
+            shade = "b" if i < starters.get(y, 0) else "a"
             out.append(f'<rect x="{cx - bw / 2:.1f}" y="{yy:.1f}" width="{bw:.1f}" height="{bh}" rx="2" class="bk bk-{shade}"/>')
             out.append(f'<path d="M{cx - bw / 2 + 3:.1f} {yy + 8:.1f}H{cx + bw / 2 - 3:.1f}M{cx - bw / 2 + 3:.1f} {yy + bh - 8:.1f}H{cx + bw / 2 - 3:.1f}" class="bk-l"/>')
     out.append("</svg>")
@@ -89,7 +91,8 @@ def foot(script=False):
     return f'''</main>
 <footer class="foot">
   <p><strong>A fan-made appreciation site.</strong> It is not affiliated with Thomas Sowell or the Hoover Institution. Every quotation is marked with how well its source is known; if one is wrong, <a href="corrections.html">tell us</a>.</p>
-  <p class="small">Photographs are the ones the original repository carried; their source and licence were not recorded. If you hold the rights and want one changed or removed, open an <a href="{REPO}/issues">issue</a>. Site by SolutionsAsService, MIT licence.</p>
+  <nav class="footnav" aria-label="Pages">{"".join(f'<a href="{h}">{t}</a>' for h, t in NAV)}</nav>
+  <p class="small">Photographs are the ones the original repository carried; their source and licence were not recorded. If you hold the rights and want one changed or removed, open an <a href="{REPO}/issues">issue</a>. The site\'s code and text are MIT-licensed; the photographs and the quoted words are not covered by that licence. Site by SolutionsAsService.</p>
 </footer>
 {'<script src="script.js"></script>' if script else ''}
 </body>
@@ -117,23 +120,24 @@ def index():
   <div class="hero-copy">
     <p class="kicker">Economist · historian · writer</p>
     <h1 id="h1">Thomas Sowell</h1>
-    <p class="lede">He keeps asking one plain question of every policy: and then what happens? This site is a reader's guide to the books, the ideas and the sayings, with the sourcing shown.</p>
-    <p class="cta"><a class="btn" href="works.html">Browse the {NB} books</a><a class="btn ghost" href="quotes.html">Read the quotes</a></p>
+    <p class="lede">A reader's guide to his books, his ideas and the sayings attributed to him, with every quotation marked for how far its source can be trusted.</p>
+    <p class="cta"><a class="btn" href="works.html">Browse the books</a><a class="btn ghost" href="quotes.html">Read the quotes</a></p>
   </div>
-  <figure class="portrait"><img src="images/Thomas-Sowell.jpg" width="1280" height="800" alt="Thomas Sowell in a tweed jacket and striped tie, against a black background" fetchpriority="high"></figure>
+  <figure class="portrait"><img src="images/Thomas-Sowell-840.jpg" width="840" height="525" alt="Photograph captioned as Thomas Sowell, in a tweed jacket and striped tie; date and source unknown" fetchpriority="high"></figure>
 </section>
 
 <section class="shelfband" aria-labelledby="h-shelf">
-  <h2 id="h-shelf" class="label">{NB} books, {Y0} to {Y1}: one book per work, stacked by year</h2>
-  <div class="shelfscroll" tabindex="0" role="group" aria-label="The shelf drawing; scroll sideways on a small screen">{shelf()}<div class="axis" aria-hidden="true">{decades}</div></div>
-  <p class="small">A selection, not a complete bibliography. The full list, by subject, is on the <a href="works.html">works page</a>.</p>
+  <h2 id="h-shelf" class="label">A shelf of {NB} books, {Y0} to {Y1}</h2>
+  {shelf()}<div class="axis" aria-hidden="true">{decades}</div>
+  <p class="small">Each block is one book and each column is a year. The three red blocks are the books in “Where to start” below. A selection, not a complete bibliography.</p>
+  <p><a class="more" href="works.html">See all {NB} on the works page</a></p>
 </section>
 
 <section class="pull" aria-labelledby="h-pull">
-  <h2 id="h-pull" class="label">The question under all of it</h2>
+  <h2 id="h-pull" class="label">One line that gets quoted often</h2>
   <blockquote><p>{e(pull["text"])}</p></blockquote>
   <p class="qmeta"><span class="tier-tag tier-sourced"><i aria-hidden="true"></i>{e(tiers["sourced"]["name"])}</span><span class="src">{e(pull["source"])}</span></p>
-  <p class="small">{by_tier["sourced"]} of the {len(quotes)} quotes on this site name a book; {by_tier["misattributed"]} circulate under his name and are probably not his. <a href="quotes.html">See how each one is marked.</a></p>
+  <p class="small">Only {by_tier["sourced"]} of the {len(quotes)} sayings on this site even name a book, and none has been checked against a page yet. <a class="more" href="quotes.html">See how each one is marked</a></p>
 </section>
 
 <section aria-labelledby="h-start">
@@ -143,25 +147,25 @@ def index():
 
 <section class="two" aria-labelledby="h-who">
   <div><h2 id="h-who" class="sech">Who he is</h2>
-  <p>Born in North Carolina in 1930 and raised in Harlem, he left school young, served in the Marine Corps, and went on to a Harvard degree in economics and a doctorate from the University of Chicago. He taught at several universities, then spent decades as a senior fellow at the Hoover Institution.</p>
+  <p>Born in North Carolina in 1930 and raised in Harlem, he left school at 17, served in the Marine Corps, and went on to a Harvard degree in economics and a doctorate from the University of Chicago. He taught at several universities, then spent decades as a senior fellow at the Hoover Institution.</p>
   <p><a class="more" href="about.html">The short biography and the ideas he returns to</a></p></div>
-  <figure class="young"><img src="images/thomas-sowell-young.jpg" width="300" height="250" alt="A younger Thomas Sowell speaking on a television panel" loading="lazy"></figure>
+  <figure class="young"><img src="images/thomas-sowell-young.jpg" width="300" height="250" alt="A younger man at a television panel, captioned as Thomas Sowell; date and source unknown" loading="lazy"></figure>
 </section>
 ''' + foot()
 
 
 def about():
     life = [("1930", "Born in Gastonia, North Carolina; grows up in Harlem, New York."),
-            ("1950s", "Leaves school young, serves in the U.S. Marine Corps, then studies economics: A.B. Harvard (1958), A.M. Columbia (1959)."),
+            ("1950s", "Leaves school at 17, serves in the U.S. Marine Corps, studies at Howard, then at Harvard (A.B. 1958) and Columbia (A.M. 1959)."),
             ("1968", "Ph.D. in economics, University of Chicago."),
-            ("1970s", "Teaches at Cornell, Amherst and the University of California, Los Angeles; publishes Say's Law (1972) and Race and Economics (1975)."),
+            ("1960s–70s", "Teaches at Cornell, Brandeis, UCLA and, as a visitor, Amherst, among other posts; publishes Say's Law (1972) and Race and Economics (1975)."),
             ("1980", "Joins the Hoover Institution, Stanford University, as a senior fellow."),
-            ("2000", "Basic Economics, the book most readers meet first."),
+            ("2000", "Basic Economics, a book written for the general reader."),
             ("2002", "Awarded the National Humanities Medal.")]
     li = "".join(f'<li><p class="yr">{y}</p><p>{e(t)}</p></li>' for y, t in life)
     ideas = [("There are no solutions, only trade-offs.", "Everything costs something. A good question about any policy is what it costs, who pays, and what else that money or time could have done."),
              ("Incentives, not intentions.", "He judges a policy by what people actually do under it, not by what its authors hoped they would do."),
-             ("Two visions.", "In A Conflict of Visions he argues that many political fights come from two different pictures of human nature, one that sees its limits as fixed and one that sees them as something to be engineered away."),
+             ("Two visions.", "In A Conflict of Visions he argues that many political fights come from two different pictures of human nature, one that treats human limits as lasting and works through trade-offs and accumulated social processes, and one that holds that wise design can overcome them."),
              ("Look at the evidence across places and times.", "His books on race, culture and migration compare many countries and centuries before they draw a conclusion.")]
     ids = "".join(f"<li><h3>{e(a)}</h3><p>{e(b)}</p></li>" for a, b in ideas)
     return head("About Thomas Sowell", "A short biography of Thomas Sowell and the four ideas he returns to most.", "about.html") + f'''
@@ -169,7 +173,7 @@ def about():
 <p class="lede">The facts below are written from general knowledge and have not yet been checked line by line against sources. See <a href="corrections.html">Corrections</a>.</p></section>
 <section class="two" aria-labelledby="h-life">
   <div><h2 id="h-life" class="sech">Life</h2><ol class="timeline">{li}</ol></div>
-  <figure class="young"><img src="images/thomas-sowell-young.jpg" width="300" height="250" alt="A younger Thomas Sowell speaking on a television panel" loading="lazy"></figure>
+  <figure class="young"><img src="images/thomas-sowell-young.jpg" width="300" height="250" alt="A younger man at a television panel, captioned as Thomas Sowell; date and source unknown" loading="lazy"></figure>
 </section>
 <section aria-labelledby="h-ideas"><h2 id="h-ideas" class="sech">Four ideas he returns to</h2><ul class="ideas">{ids}</ul>
 <p class="small">These are summaries in our words, not quotations. Where a line is his, it is on the <a href="quotes.html">quotes page</a> with its sourcing.</p></section>
@@ -183,14 +187,14 @@ def works_page():
     last = None
     for i, w in enumerate(works):
         s = subjects[w["subject"]]
-        yr = f'<p class="yr">{w["year"]}</p>' if w["year"] != last else '<p class="yr same" aria-hidden="true">·</p>'
+        yr = f'<p class="yr{" same" if w["year"] == last else ""}">{w["year"]}</p>'
         last = w["year"]
         blurb = f'<p class="blurb">{e(w["blurb"])}</p>' if w.get("blurb") else ""
-        cover = '<img class="cover" src="images/basic-economics.jpg" width="120" height="120" alt="Cover of Basic Economics" loading="lazy">' if w["title"] == "Basic Economics" else ""
+        cover = '<img class="cover" src="images/basic-economics-240.jpg" width="120" height="120" alt="Cover of Basic Economics" loading="lazy">' if w["title"] == "Basic Economics" else ""
         rows.append(f'<li class="work" id="w-{i}" data-subject="{w["subject"]}">{yr}<div class="wb"><h3>{e(w["title"])}</h3>{blurb}<p class="tag">{glyph(s["shape"])}{e(s["name"])}</p></div>{cover}</li>')
     return head("Works by Thomas Sowell", f"{NB} of Thomas Sowell's books by year and subject.", "works.html") + f'''
-<section class="page-head"><p class="kicker">Works</p><h1>{NB} books, {Y0} to {Y1}</h1>
-<p class="lede">{e(W["note"])}</p></section>
+<section class="page-head"><p class="kicker">Works</p><h1>{NB} of his books, {Y0} to {Y1}</h1>
+<p class="lede">{e(W["note"])} Listed by year; filter by subject.</p></section>
 <section aria-labelledby="h-list">
   <h2 id="h-list" class="sr">The list</h2>
   <div class="chips" role="group" aria-label="Filter by subject" id="subject-chips" hidden>{chips}</div>
@@ -201,18 +205,16 @@ def works_page():
 
 
 def quotes_page():
-    chips = '<button type="button" class="chip on" data-tier="">All</button>' + "".join(
-        f'<button type="button" class="chip" data-tier="{t["id"]}"><span class="tier-tag tier-{t["id"]}"><i aria-hidden="true"></i></span>{e(t["name"])} ({by_tier[t["id"]]})</button>' for t in Q["tiers"])
-    legend = "".join(f'<li class="tier-{t["id"]}"><span class="tier-tag tier-{t["id"]}"><i aria-hidden="true"></i>{e(t["name"])}</span><span>{e(t["blurb"])}</span></li>' for t in Q["tiers"])
+    legend = "".join(f'<li class="tier-{t["id"]}" data-tier="{t["id"]}"><span class="tier-tag tier-{t["id"]}"><i aria-hidden="true"></i>{e(t["name"])} <b class="n">({by_tier[t["id"]]})</b></span><span class="act">{e(t["blurb"])}</span></li>' for t in Q["tiers"])
     items = "".join(quote_block(q) for q in sorted(quotes, key=lambda q: list(tiers).index(q["tier"])))
     return head("Quotes attributed to Thomas Sowell", f"{len(quotes)} sayings attributed to Thomas Sowell, each marked with how well its source is known.", "quotes.html") + f'''
-<section class="page-head"><p class="kicker">Quotes</p><h1>{len(quotes)} sayings, and how far to trust each</h1>
-<p class="lede">Famous people collect sayings they never said. Each one here carries a mark for how well its source is known, so you can quote him without quoting someone else.</p></section>
-<section aria-labelledby="h-legend"><h2 id="h-legend" class="sech">How to read the marks</h2><ul class="legend">{legend}</ul></section>
+<section class="page-head"><p class="kicker">Quotes</p><h1>{len(quotes)} sayings attributed to him</h1>
+<p class="lede">Each carries a mark for how well its source is known. None has yet been checked against a printed page, so treat every mark as a lead, not a licence to quote. Listed best-sourced first.</p></section>
+<section aria-labelledby="h-legend" class="tiers"><h2 id="h-legend" class="sech">The four marks</h2>
+<ul class="legend" id="tier-legend">{legend}</ul>
+<p class="count" id="count" role="status" aria-live="polite"></p></section>
 <section aria-labelledby="h-q">
   <h2 id="h-q" class="sr">The quotes</h2>
-  <div class="chips" role="group" aria-label="Filter by source" id="tier-chips" hidden>{chips}</div>
-  <p class="count" id="count" role="status" aria-live="polite"></p>
   <ul class="quotes">{items}</ul>
 </section>
 ''' + foot(True)
@@ -226,7 +228,7 @@ def corrections():
   <div>
     <h2 class="sech">What helps most</h2>
     <ul class="plain">
-      <li><strong>A quotation:</strong> the book, edition and page, or a dated column or interview with a link. That moves it up a mark.</li>
+      <li><strong>A quotation:</strong> the book, edition and page, or a dated column or interview with a link.</li>
       <li><strong>A misattribution:</strong> where the saying really comes from.</li>
       <li><strong>A fact or a date:</strong> the source that shows the right one.</li>
       <li><strong>A photograph:</strong> its source and licence, or a request to remove it.</li>
@@ -237,9 +239,9 @@ def corrections():
   <div>
     <h2 class="sech">How a quote moves up</h2>
     <ol class="plain">
-      <li><strong>Probably not his</strong> or <strong>Doubtful</strong> becomes <strong>Widely attributed</strong> only with a printed source in his words.</li>
-      <li><strong>Widely attributed</strong> becomes <strong>Source named</strong> with a book and page, or a dated original.</li>
-      <li>We never promote a quote because it is popular.</li>
+      <li>Any quote becomes <strong>Book named</strong> only when a book, edition and page, or a dated original, shows the words. At present none has been checked.</li>
+      <li><strong>Widely attributed</strong> means popular, not checked. We never promote a quote because it is popular.</li>
+      <li><strong>Credited to someone else</strong> stays until a source in his own words is shown.</li>
     </ol>
   </div>
 </section>

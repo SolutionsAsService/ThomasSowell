@@ -139,3 +139,24 @@ section { padding: clamp(1.8rem, 5vw, 3.2rem) 0; }
 @media (min-width: 760px) { .shelfscroll .shelf, .shelfscroll .axis { min-width: 0; } }
 .mast nav a { padding: 0 .45rem; } .mast nav { margin-left: -.45rem; }
 .pull blockquote p { max-width: 34ch; }
+
+/* round 1 resolutions */
+.chips[hidden] { display: none; }
+.shelfscroll { overflow: visible; } .shelfscroll .shelf, .shelfscroll .axis { min-width: 0; }
+.shelf { margin-top: 1rem; }
+.yr.same { color: var(--ink3); font-weight: 400; }
+.tiers .legend { gap: 0; border-top: 1px solid var(--rule); }
+.tiers .legend li { border-bottom: 1px solid var(--rule); display: block; }
+.tiers .legend li > .tier-tag { display: flex; } .tiers .legend li > .act { display: block; }
+.tiers .legend li { padding: .7rem 0; } .tiers .legend .act { margin-top: .2rem; font: 400 16px/1.45 var(--sans); color: var(--ink2); }
+.tier-tag .n { font-weight: 600; letter-spacing: 0; color: var(--ink3); }
+.tierbtn { all: unset; box-sizing: border-box; display: block; width: 100%; min-height: 44px; padding: .7rem .6rem; margin: -.7rem -.6rem; width: calc(100% + 1.2rem); cursor: pointer; border-radius: 4px; }
+.tierbtn .tier-tag { display: flex; } .tierbtn .act { display: block; } .tierbtn .act { margin-top: .2rem; font: 400 16px/1.45 var(--sans); color: var(--ink2); }
+.tierbtn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tierbtn.on { background: var(--paper2); box-shadow: inset 4px 0 0 var(--accent); padding-left: 1rem; }
+.tiers .legend li:has(> .tierbtn) { padding: .7rem 0; }
+.footnav { display: flex; flex-wrap: wrap; gap: 0 1rem; margin: 0 0 .5rem; } .footnav a { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; justify-content: center; font: 600 15px var(--sans); }
+@media (hover: hover) and (pointer: fine) { .tierbtn:hover { background: var(--paper2); } }
+
+.tiers .legend .act, .tierbtn .act { font-size: 15px; }
+.tiers .legend li { padding: .55rem 0; }
