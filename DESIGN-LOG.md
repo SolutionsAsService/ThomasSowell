@@ -50,3 +50,6 @@ S1 not met (no R2). S2 not met (round 1's ADAPTs were applied after the last rou
 - No inclusion seat (Mace or Holmes) was seated; no keyboard-only walkthrough by a person.
 - Photograph source and licence unknown (owner to supply).
 - Quotes have no permalinks.
+
+## Grade of round 1: B+ (recorded by the owner, 2026-11-09)
+The site is added to the studio portfolio (guides group). The look is now the adopted dada design pack `study-ledger` 1.0.0 (grade B+). The previous version of the site is kept on the branch `legacy/pre-redesign` (commit 4c32af5). What stands between B+ and A is the Open list above, chiefly that no quotation has been checked against a printed page and that the shelf is small on a phone.
